@@ -48,36 +48,36 @@ Key Steps:
 - Testing: Test the model using PyTorch’s evaluation mode and compute accuracy.
   ```
   import torch
-import torch.nn as nn
-import torch.optim as optim
-import torchvision
-import torchvision.transforms as transforms
+  import torch.nn as nn
+  import torch.optim as optim
+  import torchvision
+  import torchvision.transforms as transforms
 
-class NeuralNet(nn.Module):
-    def __init__(self):
-        super(NeuralNet, self).__init__()
-        self.fc1 = nn.Linear(28*28, 30)
-        self.fc2 = nn.Linear(30, 10)
+  class NeuralNet(nn.Module):
+      def __init__(self):
+          super(NeuralNet, self).__init__()
+          self.fc1 = nn.Linear(28*28, 30)
+          self.fc2 = nn.Linear(30, 10)
 
     def forward(self, x):
         x = torch.sigmoid(self.fc1(x))
         x = self.fc2(x)  # Output layer (no activation since we'll use CrossEntropyLoss)
         return x
 
-# Initialize model, loss, and optimizer
-model = NeuralNet()
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.1)
+  # Initialize model, loss, and optimizer
+  model = NeuralNet()
+  criterion = nn.CrossEntropyLoss()
+  optimizer = optim.SGD(model.parameters(), lr=0.1)
 
-# Training Loop
-for epoch in range(num_epochs):
-    for images, labels in train_loader:
-        images = images.view(-1, 28*28)  # Flatten images
-        optimizer.zero_grad()
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
+  # Training Loop
+  for epoch in range(num_epochs):
+      for images, labels in train_loader:
+          images = images.view(-1, 28*28)  # Flatten images
+          optimizer.zero_grad()
+          outputs = model(images)
+          loss = criterion(outputs, labels)
+          loss.backward()
+          optimizer.step()
 
   ```
 ## **What I learned**:
